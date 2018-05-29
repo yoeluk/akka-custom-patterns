@@ -2,7 +2,7 @@ name := "akka-custom-patterns"
 
 version := "0.1"
 
-organization := "com.tesco"
+organization := "com.mydomain"
 
 scalaVersion := "2.12.6"
 
