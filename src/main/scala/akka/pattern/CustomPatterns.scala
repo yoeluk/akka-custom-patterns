@@ -20,12 +20,12 @@ object CustomPatterns {
   private def ask(actorRef: ActorRef, message: Any)(implicit timeout: Timeout): Future[Any] =
     actorRef.actorAsk(message, timeout, ActorRef.noSender)
 
-  private def toJava[T](f: Future[T], ec: ExecutionContext): CompletionStage[T] = {
+  private def toJava[T](f: Future[T], exc: ExecutionContext): CompletionStage[T] = {
     f match {
       case p: P[T] => p.wrapped
       case _ =>
         val cf = new CF[T](f)
-        implicit val ec: ExecutionContext = ec
+        implicit val ec: ExecutionContext = exc
         f onComplete cf
         cf
     }
